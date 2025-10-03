@@ -13,9 +13,9 @@ const secretKey = "your_secret_key"; // JWTの署名キー
 
 // MySQL接続
 const db = await mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "Kita0310san",
+  host: "10.251.197.184",
+  user: "teamuser",
+  password: "password123",
   database: "myapp"
 });
 
