@@ -58,6 +58,24 @@ app.get("/profile", async (req, res) => {
   }
 });
 
+// ここからお客様アンケート
+app.post("/api/requests", (req, res) => {
+  const { name, message } = req.body;
+
+  if (!message) {
+    return res.status(400).json({ error: "メッセージは必須です" });
+  }
+
+  const sql = "INSERT INTO requests (name, message) VALUES (?, ?)";
+  db.query(sql, [name, message], (err, result) => {
+    if (err) {
+      console.error("DBエラー:", err);
+      return res.status(500).json({ error: "サーバーエラー" });
+    }
+    res.status(200).json({ message: "保存完了" });
+  });
+});
+
 // サーバー起動
 app.listen(5000, () => {
   console.log("Server running on http://localhost:5000");

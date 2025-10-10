@@ -1,0 +1,77 @@
+[33mcommit bae75609c1a202cdbfb625840bc91bd5439829ca[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mimprovement[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/api_k-mino[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Merge: 2fe09c6 8e8f350
+Author: k-kawakubo0924 <fko2447056@stu.o-hara.ac.jp>
+Date:   Fri Oct 3 14:13:39 2025 +0900
+
+    Merge pull request #4 from t-shigeri:datebase
+    
+    database
+
+[33mcommit 8e8f350ef64b6701ab05a9e9737a7d00f224ef85[m[33m ([m[1;31morigin/datebase[m[33m, [m[1;32mdatebase[m[33m)[m
+Author: k-kawakubo0924 <fko2447056@stu.o-hara.ac.jp>
+Date:   Fri Oct 3 14:08:50 2025 +0900
+
+    database
+
+[33mcommit 2fe09c6bf5ac2462bcd0647ca74110d9eef1a505[m
+Merge: e71c434 03bc4be
+Author: E-shigeri <fko2447037@stu.o-hara.ac.jp>
+Date:   Thu Oct 2 12:36:06 2025 +0900
+
+    Merge pull request #3 from t-shigeri/enta-develop
+    
+    画面設計
+
+[33mcommit 03bc4be5f297fdceb667167849592ce594af8965[m[33m ([m[1;31morigin/enta-develop[m[33m)[m
+Author: t-shigeri <fko2447037@stu.o-hara.ac.jp>
+Date:   Thu Oct 2 12:33:21 2025 +0900
+
+    画面設計
+
+[33mcommit e71c434b81b43c95e27b2c8cd16a2cdfa100c8c4[m
+Merge: 4b08383 0f3218d
+Author: h-hamakawa <fko2447005@stu.o-hara.ac.jp>
+Date:   Wed Oct 1 13:46:25 2025 +0900
+
+    Merge pull request #2 from t-shigeri:k-mino
+    
+    login-appの削除,ログイン機能の追加
+
+[33mcommit 0f3218d6706ee18f29d0479244ec54b7d2570a75[m[33m ([m[1;31morigin/k-mino[m[33m, [m[1;31morigin/apicreate[m[33m, [m[1;32mk-mino[m[33m)[m
+Author: k-minoda <fko2447028@stu.o-hara.ac.jp>
+Date:   Wed Oct 1 11:27:26 2025 +0900
+
+    login-appの削除,ログイン機能の追加
+
+[33mcommit 4b0838346878dfd33efa9aba9586cc4315ecf215[m
+Merge: e37ee40 cafe13d
+Author: E-shigeri <fko2447037@stu.o-hara.ac.jp>
+Date:   Mon Sep 29 15:03:48 2025 +0900
+
+    Merge pull request #1 from t-shigeri/k-mino
+    
+    login init
+
+[33mcommit cafe13d5f6f31ea4e538644fc5d8cbb5ba70c9b2[m
+Author: k-minoda <fko2447028@stu.o-hara.ac.jp>
+Date:   Mon Sep 29 14:58:50 2025 +0900
+
+    login init
+
+[33mcommit e37ee400cc15b9ee0ab85f9887a62a11b42e3143[m[33m ([m[1;31morigin/kawakubo[m[33m, [m[1;32mkawakubo[m[33m)[m
+Author: k-kawakubo0924 <fko2447056@stu.o-hara.ac.jp>
+Date:   Fri Sep 26 10:42:18 2025 +0900
+
+    リアクトアイコン削除
+
+[33mcommit a7240696bae35aeed3dc5d6245bed3c1ecbe6977[m
+Author: k-minoda <fko2447028@stu.o-hara.ac.jp>
+Date:   Fri Sep 26 10:20:14 2025 +0900
+
+    lang ja comit
+
+[33mcommit debfc6c0d75b4240edee7d38f6e4fca30d2b5bd9[m
+Author: t-shigeri <fko2447037@stu.o-hara.ac.jp>
+Date:   Fri Sep 19 11:21:37 2025 +0900
+
+    newproject
