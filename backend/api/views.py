@@ -5,3 +5,4 @@ from rest_framework.response import Response
 def hello(request):
     data = {"message": "川久保4ね"}
     return Response(data)
+
