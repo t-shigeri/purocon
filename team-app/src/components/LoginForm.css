@@ -1,0 +1,76 @@
+/* 全体のレイアウト（中央寄せ） */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to bottom right, #f8fafc, #e2e8f0);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ログインボックス */
+.login-box {
+  background: #fff;
+  padding: 40px 50px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  text-align: center;
+}
+
+/* タイトル */
+.login-box h2 {
+  margin-bottom: 25px;
+  color: #333;
+  font-size: 1.6rem;
+}
+
+/* ラベル */
+.login-box label {
+  display: block;
+  text-align: left;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #444;
+}
+
+/* 入力欄 */
+.login-box input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.login-box input:focus {
+  border-color: #0ea5e9; /* 水色のアクセント */
+  outline: none;
+}
+
+/* ログインボタン */
+.login-box button {
+  width: 100%;
+  background-color: #0ea5e9;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.login-box button:hover {
+  background-color: #0284c7;
+}
+
+/* メッセージ */
+.message {
+  margin-top: 15px;
+  color: #e11d48;
+  font-weight: bold;
+}
