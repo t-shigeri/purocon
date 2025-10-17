@@ -6,6 +6,7 @@ import AdminPage from "./admin/AdminPage";
 import ProductsList from "./admin/ProductsList";
 import Diagnoses from "./admin/Diagnoses";
 import Settings from "./admin/Settings";
+import ProtectedRoute from "./components/ProtectedRouter";
 
 const router = createBrowserRouter([
   {
@@ -18,19 +19,25 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <AdminPage />,
-  },
-  {
-    path: "admin/products",
-    element: <ProductsList />,
-  },
-  {
-    path: "admin/diagnoses",
-    element: <Diagnoses />,
-  },
-  {
-    path: "admin/settings",
-    element: <Settings />,
+    element: <ProtectedRoute />,
+    children: [
+      {
+        index: true,
+        element: <AdminPage />,
+      },
+      {
+        path: "products",
+        element: <ProtectedRoute />,
+      },
+      {
+        path: "diagnoses",
+        element: <Diagnoses />,
+      },
+      {
+        path: "settings",
+        element: <Settings />,
+      },
+    ],
   },
 ]);
 
