@@ -21,7 +21,7 @@ export default function LoginForm() {
           body: JSON.stringify({ email, password }),
         }
       );
-
+      console.log("API Response:", response);
       if (!response.ok) {
         throw new Error(
           "ログイン失敗。メールアドレスまたはパスワードを確認してください。"
@@ -29,10 +29,15 @@ export default function LoginForm() {
       }
 
       const data = await response.json();
+      console.log("API Data (JSON):", data);
 
       // JWTなどトークンを保存（SimpleJWT想定）
       if (data.access) {
+        console.log("トークンを発見！ localStorageに保存します。");
         localStorage.setItem("accessToken", data.access);
+      } else {
+        // ★ 3. data に 'access' キーが無い場合、ここに来る
+        console.warn("data オブジェクトに 'access' キーが見つかりません。");
       }
 
       setMsg("ログイン成功！");
