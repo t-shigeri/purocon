@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function TextInputForm() {
+export default function Contactspage() {
     const [text, setText] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -11,7 +11,7 @@ function TextInputForm() {
         setError('');
 
         try {
-            const response = await fetch('http://localhost:8000/api/text/', {
+            const response = await fetch('http://localhost:8000/contacts/text/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -20,13 +20,14 @@ function TextInputForm() {
             });
 
             const data = await response.json();
-
+            console.log('サーバーからのレスポンス:', data);
             if (response.ok) {
                 console.log('成功:', data);
                 setText(''); // フォームをクリア
             } else {
                 // バリデーションエラーの表示
-                setError(data.text ? data.text[0] : '送信に失敗しました');
+                console.error('エラー詳細:', data); // ←重要！
+            setError(JSON.stringify(data))
             }
         } catch (err) {
             setError('ネットワークエラーが発生しました');

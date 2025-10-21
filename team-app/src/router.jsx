@@ -7,7 +7,7 @@ import ProductsList from "./admin/ProductsList";
 import Diagnoses from "./admin/Diagnoses";
 import Settings from "./admin/Settings";
 import ProtectedRoute from "./components/ProtectedRouter";
-
+import Contactspage from "./contacts/Contactspage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -38,6 +38,10 @@ const router = createBrowserRouter([
         element: <Settings />,
       },
     ],
+  },
+  {
+    path: "contacts",
+    element: <Contactspage />,
   },
 ]);
 
