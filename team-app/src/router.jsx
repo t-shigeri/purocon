@@ -8,6 +8,7 @@ import Diagnoses from "./admin/Diagnoses";
 import Settings from "./admin/Settings";
 import ProtectedRoute from "./components/ProtectedRouter";
 import Contactspage from "./contacts/Contactspage";
+import SkinTypeChecker from "./question/SkinTypeChecker";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -43,6 +44,9 @@ const router = createBrowserRouter([
     path: "/contacts",
     element: < Contactspage/>,
   },
+  {path: "/Question",
+    element: < SkinTypeChecker/>
+  }
 ]);
 
 export default router;
