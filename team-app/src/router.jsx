@@ -9,10 +9,15 @@ import Settings from "./admin/Settings";
 import ProtectedRoute from "./components/ProtectedRouter";
 import Contactspage from "./contacts/Contactspage";
 import SkinTypeChecker from "./question/SkinTypeChecker";
-const router = createBrowserRouter([
+import Weekrecommend from "./about/Weekrecommend.jsx"; const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+  },
+  {
+    // これは今週のおすすめ商品のpath
+    path: "/weekrecommend",
+    element: <Weekrecommend />,
   },
   {
     path: "/login",
@@ -28,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: "products",
-        element: <ProtectedRoute />,
+        element: <ProductsList/>,
       },
       {
         path: "diagnoses",
