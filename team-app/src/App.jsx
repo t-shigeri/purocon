@@ -38,6 +38,10 @@
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import LoginForm from "./components/LoginForm";
+import Weekrecommend from "./about/Weekrecommend.jsx";
+import { Link } from "react-router-dom";
+
+
 
 // Viteプロキシを使うなら BASE は空文字でOK（/api → 8000へ転送）
 // 直叩き派は .env で VITE_API_BASE_URL=http://localhost:8000 のように指定
@@ -250,12 +254,38 @@ export default function App() {
           height: 160,
           marginBottom: 16,
           display: "grid",
-          placeItems: "center",
         }}
       >
-        <span>今週のおすすめ / キャンペーン</span>
-      </div>
+        {/* 中身をWeekrecommendに置換 */}
+        <div style={{ padding: 16, overflow: "auto" }}>
+          <Weekrecommend />
+        </div>
+        <Link
+          to="/weekrecommend"
+          style={{
+            display: "block",
+            borderRadius: 12,
+            overflow: "hidden",
+            background: "#e9e9ef",
+            height: 160,
+            marginBottom: 16,
+            display: "grid",
+            placeItems: "center",
+            border: "1px solid #ddd",
+            cursor: "pointer",
+            textDecoration: "none",
+            color: "inherit",
+          }}
+          aria-label="今週のおすすめページへ"
+        >
+          {/* 中身は自由に：テキストでも画像でもOK */}
+          <span style={{ opacity: 0.75 }}>今週のおすすめ / キャンペーン</span>
+          {/* もし中身をプレビューしたいなら ↓ を使ってもOK */}
+          {/* <div style={{ padding: 16, width: "100%" }}><Weekrecommend /></div> */}
+        </Link>
 
+
+      </div>
       <div style={{ display: "flex", gap: 12, marginBottom: 16 }}>
         {["スキンケア", "メイク", "香水", "新商品"].map((c) => (
           <div

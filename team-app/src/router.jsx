@@ -12,7 +12,7 @@ import SkinTypeChecker from "./question/SkinTypeChecker";
 import Weekrecommend from "./about/Weekrecommend.jsx"; const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <App />
   },
   {
     // これは今週のおすすめ商品のpath
@@ -33,7 +33,7 @@ import Weekrecommend from "./about/Weekrecommend.jsx"; const router = createBrow
       },
       {
         path: "products",
-        element: <ProductsList/>,
+        element: <ProductsList />,
       },
       {
         path: "diagnoses",
@@ -47,10 +47,11 @@ import Weekrecommend from "./about/Weekrecommend.jsx"; const router = createBrow
   },
   {
     path: "/contacts",
-    element: < Contactspage/>,
+    element: < Contactspage />,
   },
-  {path: "/Question",
-    element: < SkinTypeChecker/>
+  {
+    path: "/Question",
+    element: < SkinTypeChecker />
   }
 ]);
 
