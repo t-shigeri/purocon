@@ -8,70 +8,96 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('product', '0001_initial'),
+        ("product", "0001_initial"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='access',
-            name='Product_id',
+            model_name="access",
+            name="Product_id",
         ),
         migrations.RemoveField(
-            model_name='access',
-            name='access',
+            model_name="access",
+            name="access",
         ),
         migrations.RemoveField(
-            model_name='product',
-            name='Ingredients_List',
+            model_name="product",
+            name="Ingredients_List",
         ),
         migrations.RemoveField(
-            model_name='product',
-            name='Price',
+            model_name="product",
+            name="Price",
         ),
         migrations.RemoveField(
-            model_name='product',
-            name='Product_name',
-        ),
-        migrations.RemoveField(
-            model_name='product',
-            name='barcode',
+            model_name="product",
+            name="Product_name",
         ),
         migrations.AddField(
-            model_name='access',
-            name='access_count',
-            field=models.IntegerField(default=0, verbose_name='アクセス数'),
+            model_name="access",
+            name="access_count",
+            field=models.IntegerField(default=0, verbose_name="アクセス数"),
         ),
         migrations.AddField(
-            model_name='access',
-            name='product',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='product.product', verbose_name='商品'),
+            model_name="access",
+            name="product",
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="product.product",
+                verbose_name="商品",
+            ),
             preserve_default=False,
         ),
         migrations.CreateModel(
-            name='ProductImage',
+            name="ProductImage",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('dt', models.DateTimeField(default=django.utils.timezone.now, verbose_name='投稿日時')),
-                ('content', models.ImageField(upload_to='bbs/product_image/content', verbose_name='画像')),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='product.product', verbose_name='商品')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "dt",
+                    models.DateTimeField(
+                        default=django.utils.timezone.now, verbose_name="投稿日時"
+                    ),
+                ),
+                (
+                    "content",
+                    models.ImageField(
+                        upload_to="bbs/product_image/content", verbose_name="画像"
+                    ),
+                ),
+                (
+                    "product",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="product.product",
+                        verbose_name="商品",
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='product',
-            name='Ingredients_list',
-            field=models.TextField(default='', verbose_name='成分表'),
+            model_name="product",
+            name="Ingredients_list",
+            field=models.TextField(default="", verbose_name="成分表"),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='product',
-            name='price',
-            field=models.IntegerField(default=0, verbose_name='価格'),
+            model_name="product",
+            name="price",
+            field=models.IntegerField(default=0, verbose_name="価格"),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='product',
-            name='product_name',
-            field=models.CharField(default='', max_length=100, verbose_name='商品名'),
+            model_name="product",
+            name="product_name",
+            field=models.CharField(default="", max_length=100, verbose_name="商品名"),
             preserve_default=False,
         ),
     ]
