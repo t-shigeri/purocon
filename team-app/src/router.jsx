@@ -2,8 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import LoginForm from "./components/LoginForm";
 import AdminPage from "./admin/AdminPage";
-import ProductsList from "./admin/ProductsList";
-import Diagnoses from "./admin/Diagnoses";
+import ProductsList from "./admin/Product/ProductsList.jsx";
+import Diagnoses from "./admin/Diagnoses/Diagnoses";
 import Settings from "./admin/settings/Settings";
 import ProtectedRoute from "./components/ProtectedRouter";
 import Contactspage from "./contacts/Contactspage";
@@ -12,7 +12,7 @@ import SkinTypeChecker from "./question/SkinTypeChecker";
 // screendesign ブランチからの import
 import Weekrecommend from "./about/Weekrecommend.jsx";
 // main ブランチからの import
-import Ingredient from "./admin/Ingredient";
+import Ingredient from "./admin/Ingredient/Ingredient.jsx";
 import PasswordChangeForm from "./admin/settings/PasswordChangeForm";
 
 const router = createBrowserRouter([
