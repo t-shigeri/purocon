@@ -243,7 +243,7 @@ export default function App() {
             borderRadius: 6,
           }}
         />
-        <strong>PUROCON COSME</strong>
+        <strong>AQUA VAIL</strong>
       </div>
 
       <div
@@ -257,7 +257,7 @@ export default function App() {
         }}
       >
         {/* 中身をWeekrecommendに置換 */}
-        <div style={{ padding: 16, overflow: "auto" }}>
+        <div style={{ padding: 0, overflow: "auto" }}>
           <Weekrecommend />
         </div>
         <Link
@@ -278,10 +278,15 @@ export default function App() {
           }}
           aria-label="今週のおすすめページへ"
         >
-          {/* 中身は自由に：テキストでも画像でもOK */}
-          <span style={{ opacity: 0.75 }}>今週のおすすめ / キャンペーン</span>
-          {/* もし中身をプレビューしたいなら ↓ を使ってもOK */}
-          {/* <div style={{ padding: 16, width: "100%" }}><Weekrecommend /></div> */}
+          <img
+            src="\assets\今週のおすすめ商品 ＆ キャンペーン！！.png"
+            alt="今週のおすすめ"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+          />
         </Link>
 
 
