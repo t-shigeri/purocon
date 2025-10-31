@@ -19,6 +19,9 @@ from django.contrib import admin
 from django.urls import path, include
 from backend import views
 from rest_framework.routers import DefaultRouter
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 router = DefaultRouter()
 router.register(r"admin/users", views.UserAdminViewSet, basename="admin-user")
@@ -26,8 +29,10 @@ router.register(r"admin/users", views.UserAdminViewSet, basename="admin-user")
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include("api.urls")),
+    path("api/product/", include("product.urls")),
     path("contacts/", include("contacts.urls")),
     path("api/accounts/", include("accounts.urls")),
+    path("api/products/", include("product.urls")),
     path("api/", include(router.urls)),  # GET /api/admin/users/, POST /api/
     # 認証関連のURL
     path(
@@ -37,3 +42,8 @@ urlpatterns = [
     ),  # PUT /api/auth/password/change/
     # ... (例: path('api/auth/', include('djoser.urls.jwt')), ) ...
 ]
+# --- このブロックを urlpatterns の下に追加 ---
+# (DEBUG=True の開発環境でのみ、/media/ へのアクセスを許可する設定)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# ----------------------------------------
