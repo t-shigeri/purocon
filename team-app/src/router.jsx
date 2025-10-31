@@ -14,7 +14,6 @@ import Weekrecommend from "./about/Weekrecommend.jsx";
 // main ブランチからの import
 import Ingredient from "./admin/Ingredient/Ingredient.jsx";
 import PasswordChangeForm from "./admin/settings/PasswordChangeForm";
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -56,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: "passwordchangeform",
         element: <PasswordChangeForm />,
+      },
+      {
+        path: "ProductsList",
+        element: <ProductsList />,
       },
     ],
   },
