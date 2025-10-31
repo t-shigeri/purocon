@@ -4,6 +4,7 @@ from rest_framework import viewsets
 from rest_framework.parsers import (
     MultiPartParser,
     FormParser,
+    JSONParser,
 )  # (1) 画像アップロードのために追加
 from .models import Product
 
@@ -24,9 +25,9 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     # (3) デフォルトのSerializerを指定 (主に 'retrieve' (詳細表示) で使われる)
     serializer_class = ProductListSerializer
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
 
     # (4) 画像やファイルを含むフォームデータを受け取れるようにする
-    parser_classes = [MultiPartParser, FormParser]
 
     # (5) アクション(操作)に応じてSerializerを動的に切り替える
     def get_serializer_class(self):

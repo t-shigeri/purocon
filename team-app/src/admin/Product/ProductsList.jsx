@@ -1,106 +1,125 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-// (CSSを適用する場合)
-// import './ProductList.css';
+import ProductCreateForm from "./ProductCreateForm";
+import ProductEditModal from "./ProducxtEditModal.jsx"; // (1) 編集モーダルをインポート
+import "./ProductEditModal.css"; // (2) モーダルのCSSをインポート
 
 function ProductList() {
-  // --- Stateの定義 ---
-  const [products, setProducts] = useState([]); // 商品データを保持する
-  const [loading, setLoading] = useState(true); // 読み込み中かどうか
-  const [error, setError] = useState(null); // エラーメッセージ
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // --- データ取得処理 ---
-  useEffect(() => {
-    // DRF APIのエンドポイント (Djangoサーバが8000番ポートで動いていると仮定)
+  // (3) どの商品を編集中か管理する state (null = 編集してない)
+  const [editingProduct, setEditingProduct] = useState(null);
+
+  // APIからデータを取得する関数
+  const fetchProducts = () => {
+    setLoading(true);
     const API_URL = "http://localhost:8000/api/products/";
-
-    // axios を使ってGETリクエストを送信
     axios
       .get(API_URL)
       .then((response) => {
-        // 成功時: データをstateに保存
         setProducts(response.data);
-        setLoading(false); // 読み込み完了
+        setLoading(false);
       })
       .catch((error) => {
-        // 失敗時: エラーメッセージをstateに保存
-        console.error("API Error:", error);
         setError("商品データの取得に失敗しました。");
-        setLoading(false); // 読み込み完了 (エラー)
+        setLoading(false);
       });
-  }, []); // [] を指定することで、コンポーネントのマウント時に1回だけ実行
+  };
 
-  // --- レンダリング(表示)処理 ---
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
-  // (1) 読み込み中の表示
-  if (loading) {
-    return <div>読み込み中...</div>;
-  }
+  // 削除処理の関数
+  const handleDelete = (id) => {
+    if (window.confirm("本当にこの商品を削除しますか？")) {
+      const API_URL = `http://localhost:8000/api/products/${id}/`;
+      axios
+        .delete(API_URL)
+        .then((response) => {
+          alert("商品を削除しました。");
+          fetchProducts();
+        })
+        .catch((error) => {
+          alert("商品の削除に失敗しました。");
+        });
+    }
+  };
 
-  // (2) エラー発生時の表示
-  if (error) {
-    return <div style={{ color: "red" }}>エラー: {error}</div>;
-  }
+  // (4) 編集ボタンが押された時の処理
+  //    (どの商品を編集するか state にセットする)
+  const handleEditClick = (product) => {
+    setEditingProduct(product);
+  };
 
-  // (3) 登録データがない場合の表示
-  if (products.length === 0) {
-    return <div>登録されている商品がありません。</div>;
-  }
+  // (5) モーダルが閉じられた時の処理
+  const handleCloseModal = () => {
+    setEditingProduct(null);
+  };
 
-  // (4) 正常時の表示
+  // (6) モーダルでの更新が成功した時の処理
+  const handleUpdateSuccess = () => {
+    setEditingProduct(null); // モーダルを閉じる
+    fetchProducts(); // 一覧を再読み込み
+  };
+
+  // --- レンダリング ---
+  if (loading && products.length === 0) return <div>読み込み中...</div>;
+  if (error) return <div style={{ color: "red" }}>エラー: {error}</div>;
+
   return (
     <div>
+      <ProductCreateForm onProductAdded={fetchProducts} />
+      <hr style={{ margin: "2rem 0" }} />
       <h2>商品一覧</h2>
+      {loading && <div>一覧を更新中...</div>}
 
-      {/* (CSSでスタイルを当てると見やすくなります) */}
+      {/* ... (table, thead) ... */}
       <table className="product-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>画像</th>
-            <th>商品名</th>
-            <th>価格</th>
-            <th>操作</th>
-          </tr>
-        </thead>
+        <thead>{/* ... (th) ... */}</thead>
         <tbody>
           {products.map((product) => (
             <tr key={product.id}>
-              <td>{product.id}</td>
+              {/* ... (td: id, 画像, 商品名, 価格) ... */}
               <td>
-                {/* 画像が存在するか (product.images?.[0]?.content) をまず確認
-                 */}
-                {product.images?.[0]?.content && (
-                  <img
-                    src={
-                      /* URLが 'http' から始まっていればそのまま使い、
-                        始まっていなければ (例: /media/...)、
-                        バックエンドのドメインを先頭に追加します。
-                      */
-                      product.images[0].content.startsWith("http")
+                <img
+                  src={
+                    product.images?.[0]?.content
+                      ? product.images[0].content.startsWith("http")
                         ? product.images[0].content
                         : `http://localhost:8000${product.images[0].content}`
-                    }
-                    alt={product.product_name}
-                    style={{
-                      width: "50px", // 幅を 100px に固定
-                      height: "100px", // 高さを 100px に固定
-                      objectFit: "cover", // はみ出た部分をトリミング (CSSの object-fit: cover)
-                      borderRadius: "8px", // (オプション: 角を丸くすると見栄えが良くなります)
-                    }}
-                  />
-                )}
+                      : "default-image-path.jpg" // (念の為のデフォルト画像)
+                  }
+                  alt={product.product_name}
+                  style={{
+                    width: "100px",
+                    height: "100px",
+                    objectFit: "cover",
+                  }}
+                />
               </td>
               <td>{product.product_name}</td>
               <td>{product.price} 円</td>
+
+              {/* --- (7) 編集ボタンに onClick を追加 --- */}
               <td>
-                <button>編集</button>
-                <button>削除</button>
+                <button onClick={() => handleEditClick(product)}>編集</button>
+                <button onClick={() => handleDelete(product.id)}>削除</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      {/* --- (8) モーダルコンポーネントをレンダリング --- */}
+      {/* editingProduct がセットされている時だけモーダルが表示される */}
+      <ProductEditModal
+        product={editingProduct}
+        onClose={handleCloseModal}
+        onUpdateSuccess={handleUpdateSuccess}
+      />
     </div>
   );
 }
