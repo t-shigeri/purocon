@@ -29,7 +29,7 @@ class ProductListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         # 一覧に必要な最小限のフィールドを指定します
-        fields = ["id", "product_name", "price", "images"]
+        fields = ["id", "product_name", "price", "images", "ingredients_list"]
         # (例: 'ingredients_list' はデータが重いので一覧からは除外)
 
     # (B) の SerializerMethodField を使う場合のメソッド
@@ -54,7 +54,13 @@ class ProductCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         # 'uploaded_images' を含める
-        fields = ["id", "product_name", "ingredients_list", "price", "uploaded_images"]
+        fields = [
+            "id",
+            "product_name",
+            "ingredients_list",
+            "price",
+            "uploaded_images",
+        ]
 
     # create メソッドを上書き
     def create(self, validated_data):
