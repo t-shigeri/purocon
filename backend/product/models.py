@@ -5,7 +5,7 @@ from django.utils import timezone
 # Create your models here.
 class Product(models.Model):  # 商品モデル
     product_name = models.CharField(max_length=100, verbose_name="商品名")
-    ingredients_list = models.TextField(verbose_name="成分表")
+    ingredients_list = models.TextField(verbose_name="成分表", blank=True, null=True)
     price = models.IntegerField(verbose_name="価格")
 
     def images(self):
