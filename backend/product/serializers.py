@@ -76,7 +76,52 @@ class ProductCreateSerializer(serializers.ModelSerializer):
 # createとは別のロジックが必要な場合が多いです。
 # (ここでは簡単な例として定義)
 class ProductUpdateSerializer(serializers.ModelSerializer):
+
+    # (1) 新規画像追加用の「窓口」 (Create と同じ)
+    uploaded_images = serializers.ListField(
+        child=serializers.ImageField(), write_only=True, required=False
+    )
+
+    # (2) 削除したい画像のIDリストを受け取る「窓口」
+    images_to_delete = serializers.ListField(
+        child=serializers.IntegerField(), write_only=True, required=False
+    )
+
     class Meta:
         model = Product
         # uploaded_images は含めない（別途、画像追加/削除APIを作るのが一般的）
-        fields = ["id", "product_name", "ingredients_list", "price"]
+        fields = [
+            "id",
+            "product_name",
+            "ingredients_list",
+            "price",
+            # write_only のフィールド
+            "uploaded_images",
+            "images_to_delete",
+        ]
+
+        # (3) update メソッドを上書き（オーバーライド）
+
+    def update(self, instance, validated_data):
+
+        # (A) 先に画像リストを取り出す
+        uploaded_images = validated_data.pop("uploaded_images", [])
+        images_to_delete_ids = validated_data.pop("images_to_delete", [])
+
+        # (B) 残った text データを親の update メソッドで更新
+        #     (validated_data に残っているものだけが更新される)
+        instance = super().update(instance, validated_data)
+
+        # (C) 削除対象の画像を削除
+        if images_to_delete_ids:
+            # (セキュリティのため、この商品 'instance' に紐づく画像だけを削除対象にする)
+            ProductImage.objects.filter(
+                product=instance, id__in=images_to_delete_ids
+            ).delete()
+
+        # (D) 新規追加の画像を登録 (Create と同じ)
+        for image in uploaded_images:
+            ProductImage.objects.create(product=instance, content=image)
+
+        instance.save()
+        return instance
