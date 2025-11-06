@@ -4,6 +4,8 @@ import ProductCreateForm from "./ProductCreateForm";
 import ProductEditModal from "./ProducxtEditModal.jsx"; // (1) 編集モーダルをインポート
 import "./ProductEditModal.css"; // (2) モーダルのCSSをインポート
 
+import "./ProductAdmin.css"; // ★ 1. スタイルシートをインポート
+
 function ProductList() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -70,51 +72,85 @@ function ProductList() {
   if (error) return <div style={{ color: "red" }}>エラー: {error}</div>;
 
   return (
-    <div>
+    // ★ 2. ページ全体のコンテナ
+    <div className="product-admin-container">
       <ProductCreateForm onProductAdded={fetchProducts} />
-      <hr style={{ margin: "2rem 0" }} />
-      <h2>商品一覧</h2>
-      {loading && <div>一覧を更新中...</div>}
 
-      {/* ... (table, thead) ... */}
-      <table className="product-table">
-        <thead>{/* ... (th) ... */}</thead>
-        <tbody>
-          {products.map((product) => (
-            <tr key={product.id}>
-              {/* ... (td: id, 画像, 商品名, 価格) ... */}
-              <td>
-                <img
-                  src={
-                    product.images?.[0]?.content
-                      ? product.images[0].content.startsWith("http")
-                        ? product.images[0].content
-                        : `http://localhost:8000${product.images[0].content}`
-                      : "default-image-path.jpg" // (念の為のデフォルト画像)
-                  }
-                  alt={product.product_name}
-                  style={{
-                    width: "100px",
-                    height: "100px",
-                    objectFit: "cover",
-                  }}
-                />
-              </td>
-              <td>{product.product_name}</td>
-              <td>{product.price} 円</td>
+      <hr
+        style={{
+          margin: "2rem 0",
+          border: "none",
+          borderTop: "1px solid #eee",
+        }}
+      />
 
-              {/* --- (7) 編集ボタンに onClick を追加 --- */}
-              <td>
-                <button onClick={() => handleEditClick(product)}>編集</button>
-                <button onClick={() => handleDelete(product.id)}>削除</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {/* ★ 3. 一覧セクション */}
+      <div className="list-section">
+        <h2>商品一覧</h2>
+        {loading && <div>一覧を更新中...</div>}
+
+        {!loading && products.length === 0 && (
+          <div>登録されている商品がありません。</div>
+        )}
+
+        {products.length > 0 && (
+          <table className="product-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>画像</th>
+                <th>商品名</th>
+                <th>価格</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              {products.map((product) => (
+                <tr key={product.id}>
+                  <td>{product.id}</td>
+                  <td>
+                    <img
+                      src={
+                        product.images?.[0]?.content
+                          ? product.images[0].content.startsWith("http")
+                            ? product.images[0].content
+                            : `http://localhost:8000${product.images[0].content}`
+                          : "default-image-path.jpg" // (念の為のデフォルト画像)
+                      }
+                      alt={product.product_name}
+                      style={{
+                        width: "100px",
+                        height: "100px",
+                        objectFit: "cover",
+                      }}
+                    />
+                  </td>
+                  <td>{product.product_name}</td>
+                  <td>{product.price} 円</td>
+
+                  {/* ★ 4. 編集・削除ボタンのセル */}
+                  <td className="action-cell">
+                    <button
+                      className="edit-btn" // ★ 5. 編集ボタン
+                      onClick={() => handleEditClick(product)}
+                    >
+                      編集
+                    </button>
+                    <button
+                      className="delete-btn" // ★ 6. 削除ボタン
+                      onClick={() => handleDelete(product.id)}
+                    >
+                      削除
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
 
       {/* --- (8) モーダルコンポーネントをレンダリング --- */}
-      {/* editingProduct がセットされている時だけモーダルが表示される */}
       <ProductEditModal
         product={editingProduct}
         onClose={handleCloseModal}
