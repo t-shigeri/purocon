@@ -10,3 +10,4 @@ class Product(models.Model):  # 商品モデル
 class Access(models.Model):  # モデル（商品ごとのアクセス数を数える）
     Product_id = models.ForeignKey(Product,on_delete=models.CASCADE)  # 商品名（外部キー）
     access = models.IntegerField()
+    
