@@ -41,8 +41,6 @@ import LoginForm from "./components/LoginForm";
 import Weekrecommend from "./about/Weekrecommend.jsx";
 import { Link } from "react-router-dom";
 
-
-
 // Viteプロキシを使うなら BASE は空文字でOK（/api → 8000へ転送）
 // 直叩き派は .env で VITE_API_BASE_URL=http://localhost:8000 のように指定
 const BASE = import.meta.env.VITE_API_BASE_URL || "";
@@ -283,8 +281,6 @@ export default function App() {
           {/* もし中身をプレビューしたいなら ↓ を使ってもOK */}
           {/* <div style={{ padding: 16, width: "100%" }}><Weekrecommend /></div> */}
         </Link>
-
-
       </div>
       <div style={{ display: "flex", gap: 12, marginBottom: 16 }}>
         {["スキンケア", "メイク", "香水", "新商品"].map((c) => (
