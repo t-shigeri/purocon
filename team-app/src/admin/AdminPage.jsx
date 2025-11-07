@@ -24,7 +24,7 @@ export default function AdminHome() {
 
         <Link to="/admin/settings/settings" style={styles.card}>
           <h2>設定</h2>
-          <p>管理者アカウントやシステム設定を変更します。</p>
+          <p>システム設定を変更します。</p>
         </Link>
       </div>
     </div>
