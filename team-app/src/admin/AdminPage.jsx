@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
+import Logout from "../components/logout";
+import "./AdminPage.css";
 
 export default function AdminHome() {
   return (
     <div style={styles.container}>
       <h1 style={styles.title}>管理者メニュー</h1>
       <p style={styles.subtitle}>管理したい項目を選択してください</p>
-
+      <div className="logout-button-container">
+        <Logout />
+      </div>
       <div style={styles.menuContainer}>
         <Link to="/admin/products" style={styles.card}>
           <h2>商品管理</h2>

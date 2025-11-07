@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
+import "../AdminPage.css";
+import Logout from "../../components/logout";
 
 export default function AdminHome() {
   return (
     <div style={styles.container}>
+      <div className="logout-button-container">
+        <Logout />
+      </div>
+
       <h1 style={styles.title}>管理者設定画面</h1>
       <p style={styles.subtitle}>管理したい項目を選択してください</p>
 

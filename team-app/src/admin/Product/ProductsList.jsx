@@ -5,6 +5,7 @@ import ProductEditModal from "./ProducxtEditModal.jsx"; // (1) 編集モーダ�
 import "./ProductEditModal.css"; // (2) モーダルのCSSをインポート
 
 import "./ProductAdmin.css"; // ★ 1. スタイルシートをインポート
+import Logout from "../../components/logout.jsx";
 
 function ProductList() {
   const [products, setProducts] = useState([]);
@@ -75,6 +76,9 @@ function ProductList() {
     // ★ 2. ページ全体のコンテナ
     <div className="product-admin-container">
       <ProductCreateForm onProductAdded={fetchProducts} />
+      <div className="logout-button-container">
+        <Logout />
+      </div>
 
       <hr
         style={{

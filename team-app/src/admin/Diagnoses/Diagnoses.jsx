@@ -1,5 +1,13 @@
-import React from "react";
+import Logout from "../../components/logout";
+import "../AdminPage.css";
 
-export default function diagnoses() {
-  return <div>diagnoses</div>;
+export default function Diagnoses() {
+  return (
+    <>
+      <div>Diagnoses</div>
+      <div className="logout-button-container">
+        <Logout />
+      </div>
+    </>
+  );
 }
