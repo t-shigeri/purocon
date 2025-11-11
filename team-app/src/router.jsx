@@ -8,9 +8,10 @@ import Settings from "./admin/settings/Settings";
 import ProtectedRoute from "./components/ProtectedRouter";
 import Contactspage from "./contacts/Contactspage";
 import SkinTypeChecker from "./question/SkinTypeChecker";
-
+import Importlogpage from "./admin/API_input/Importlogpage.jsx";
 // screendesign ブランチからの import
 import Weekrecommend from "./about/Weekrecommend.jsx";
+import Externalapiconfigpage from "./admin/API_input/Externalapiconfigpage"
 // main ブランチからの import
 import Ingredient from "./admin/Ingredient/Ingredient.jsx";
 import PasswordChangeForm from "./admin/settings/PasswordChangeForm";
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
     path: "/weekrecommend",
     element: <Weekrecommend />,
   },
+
   {
     path: "/login",
     element: <LoginForm />,
@@ -70,6 +72,15 @@ const router = createBrowserRouter([
     path: "/Question",
     element: <SkinTypeChecker />,
   },
+  {
+    path: "/importlog",
+    element: <Importlogpage />
+  },
+  {
+    path: "/APIconfig",
+    element: <Externalapiconfigpage />
+  }
+
 ]);
 
 export default router;
