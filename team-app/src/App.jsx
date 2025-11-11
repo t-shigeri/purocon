@@ -37,7 +37,6 @@
 // src/App.jsx（DRF + SimpleJWT 版）
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import LoginForm from "./components/LoginForm";
 import Weekrecommend from "./about/Weekrecommend.jsx";
 import { Link } from "react-router-dom";
 
