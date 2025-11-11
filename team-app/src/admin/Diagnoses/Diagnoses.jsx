@@ -1,4 +1,4 @@
-import Logout from "../../components/logout";
+import Logout from "../../login/logout";
 import "../AdminPage.css";
 
 export default function Diagnoses() {

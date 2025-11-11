@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
-import LoginForm from "./components/LoginForm";
+import LoginForm from "./login/LoginForm";
 import AdminPage from "./admin/AdminPage";
 import ProductsList from "./admin/Product/ProductsList.jsx";
 import Diagnoses from "./admin/Diagnoses/Diagnoses";
 import Settings from "./admin/settings/Settings";
-import ProtectedRoute from "./components/ProtectedRouter";
+import ProtectedRoute from "./login/ProtectedRouter";
 import Contactspage from "./contacts/Contactspage";
 import SkinTypeChecker from "./question/SkinTypeChecker";
 

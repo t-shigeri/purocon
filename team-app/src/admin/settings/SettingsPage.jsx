@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthContext"; // 仮のAuthContext
-import PasswordChangeForm from "../admin/settings/PasswordChangeForm";
+import PasswordChangeForm from "./PasswordChangeForm";
 import UserManagement from "../components/UserManagement";
 
 function SettingsPage() {

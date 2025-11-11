@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "../AdminPage.css";
-import Logout from "../../components/logout";
+import Logout from "../../login/logout";
 
 export default function AdminHome() {
   return (
