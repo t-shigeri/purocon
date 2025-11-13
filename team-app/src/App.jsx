@@ -1,7 +1,9 @@
 import { useEffect, useRef } from "react";
 import Weekrecommend from "./about/Weekrecommend.jsx";
 import { Link, useNavigate } from "react-router-dom";
+
 import "./App.css";
+import SkinTypeChecker from "./question/SkinTypeChecker.jsx";
 
 export default function App() {
   const navigate = useNavigate();
@@ -38,17 +40,14 @@ export default function App() {
         {" "}
         <div className="recommend-inner">
           {" "}
-          <Weekrecommend />
+          <SkinTypeChecker />
         </div>
         <Link
-          to="/weekrecommend"
+          to="/Question"
           className="recommend-link"
           aria-label="今週のおすすめページへ"
         >
-          <span className="recommend-link-label">
-            {" "}
-            今週のおすすめ / キャンペーン
-          </span>
+          <span className="recommend-link-label"> 肌質診断はこちら</span>
         </Link>
       </div>
       <div className="category-bar">
