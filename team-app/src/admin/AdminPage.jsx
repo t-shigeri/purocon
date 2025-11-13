@@ -26,7 +26,7 @@ export default function AdminHome() {
           <p>お客様の診断履歴やおすすめ傾向を確認できます。</p>
         </Link>
 
-        <Link to="/admin/settings/settings" style={styles.card}>
+        <Link to="/admin/PasswordChangeForm" style={styles.card}>
           <h2>設定</h2>
           <p>システム設定を変更します。</p>
         </Link>
