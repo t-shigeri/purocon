@@ -1,26 +1,130 @@
-.app{min-height:100vh;display:flex;flex-direction:column}
+/* App.css */
 
-/* header（今回のApp.jsxはヘッダーを内蔵UIで簡易化しているため最低限） */
-.site-header{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;
-  padding:12px 16px;background:rgba(17,19,21,.72);backdrop-filter:blur(8px) saturate(1.1);border-bottom:1px solid #222}
-
-/* フッター（ホーム/戻る/ヘルプ ※今回のApp.jsxでは独自UIでrender） */
-.site-footer{position:fixed;left:0;right:0;bottom:0;display:flex;gap:8px;justify-content:space-around;
-  padding:10px;background:rgba(17,19,21,.9);border-top:1px solid #222}
-.site-footer button{flex:1;padding:10px;border-radius:10px;border:1px solid #333;background:#1e2327;color:var(--fg)}
-
-/* 汎用カード */
-.card{background:var(--card);border:1px solid #222;border-radius:14px;overflow:hidden}
-.badge{font-size:12px;border:1px solid var(--accent);padding:2px 6px;border-radius:999px;color:var(--accent)}
-.price{color:var(--accent);font-weight:700}
-
-/* フォーム */
-.kiosk-form input{
-  width:100%;padding:10px;border-radius:10px;border:1px solid #333;background:#131619;color:var(--fg);
-}
-.kiosk-form button{
-  width:100%;padding:10px;border-radius:10px;border:1px solid #444;background:#2a2f34;color:var(--fg)
+/* メインコンテナ */
+.app-container {
+  max-width: 480px;
+  margin: 24px auto;
+  padding: 16px;
+  font-family: system-ui, sans-serif; /* JSXから推測 */
 }
 
-/* 小さめテキスト */
-.muted{color:var(--muted);font-size:12px}
+/* ロゴエリア */
+.logo-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+.logo-icon {
+  width: 28px;
+  height: 28px;
+  background: #b04747;
+  border-radius: 6px;
+}
+
+/* おすすめエリア */
+.recommend-container {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #e9e9ef;
+  height: 160px;
+  margin-bottom: 16px;
+  display: grid;
+}
+
+.recommend-inner {
+  padding: 16px;
+  overflow: auto;
+}
+
+.recommend-link {
+  /* スタイルが重複していたため整理 */
+  display: grid;
+  place-items: center;
+  height: 160px;
+  margin-bottom: 16px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: #e9e9ef;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.recommend-link-label {
+  opacity: 0.75;
+}
+
+/* カテゴリバー */
+.category-bar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.category-item {
+  width: 64px;
+  height: 64px;
+  border-radius: 999px; /* 50%でも可 */
+  background: #f1d4d9;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+}
+
+/* 商品カタログ */
+.catalog-title {
+  margin: 8px 0;
+}
+
+.catalog-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* 商品カード */
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.product-image-placeholder {
+  height: 110px;
+  background: #e3e6ea;
+}
+
+.product-info {
+  padding: 10px;
+}
+
+.product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.product-catch {
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.product-price {
+  color: #a55723;
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+/* 店舗情報 */
+.store-info {
+  margin-top: 20px;
+  padding-top: 12px;
+  border-top: 1px solid #eee;
+  font-size: 14px;
+  color: #555;
+}

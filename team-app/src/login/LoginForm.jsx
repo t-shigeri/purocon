@@ -1,3 +1,5 @@
+// App.jsxでAlt＋Lまたはアイコンボタン5回タップでログイン画面に遷移
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./LoginForm.css";
@@ -6,7 +8,7 @@ export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");
-  const navigate = useNavigate(); // ← ここを追加
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -1,0 +1,159 @@
+/* --- ページ全体のコンテナ --- */
+.product-admin-container {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  max-width: 1200px;
+  margin: 2rem auto; /* ページ全体を中央揃え */
+  padding: 0 1rem;
+}
+
+/* --- (A) 新規登録フォーム --- */
+/* ProductCreateForm.jsx に適用 */
+.create-form-container {
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.create-form-container h2 {
+  margin-top: 0;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 0.5rem;
+  display: inline-block;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group textarea,
+.form-group input[type="file"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* paddingが幅を超えないように */
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+  outline: none;
+}
+
+/* 登録ボタン */
+.submit-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-decoration: none;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
+.submit-btn:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;
+}
+
+
+/* --- (B) 商品一覧テーブル --- */
+/* ProductsList.jsx に適用 */
+.list-section h2 {
+  border-bottom: 2px solid #28a745;
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse; /* ボーダーを重ねる */
+  margin-top: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden; /* 角丸を効かせるため */
+}
+
+/* テーブルヘッダー (thead) */
+.product-table th {
+  background-color: #f1f3f5;
+  padding: 1rem;
+  text-align: left;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: #555;
+}
+
+/* テーブルセル (td) */
+.product-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #e9ecef;
+  vertical-align: middle; /* セル内で上下中央揃え */
+}
+
+/* テーブルの行 (tr) */
+.product-table tbody tr:last-child td {
+  border-bottom: none; /* 最後の行の下線は消す */
+}
+
+
+/* テーブル内の画像 */
+.product-table img {
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+/* --- (C) 編集・削除ボタン --- */
+.action-cell {
+  display: flex;
+  gap: 0.5rem; /* ボタンの間に隙間を空ける */
+  align-items: center; /* ★ この行を追加: ボタンをセル内で上下中央に揃える */
+}
+.edit-btn,
+.delete-btn {
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+/* 編集ボタン (青系) */
+.edit-btn {
+  background-color: #007bff;
+  color: white;
+}
+.edit-btn:hover {
+  background-color: #0056b3;
+}
+
+/* 削除ボタン (赤系) */
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+.delete-btn:hover {
+  background-color: #a71d2a;
+}

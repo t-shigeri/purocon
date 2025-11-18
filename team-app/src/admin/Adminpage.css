@@ -1,0 +1,24 @@
+/* --- ログアウトボタン --- */
+.logout-button-container {
+  position: absolute; /* (1) ページ全体を基準に配置する */
+  top: 1rem;          /* (2) 上から 1rem (約16px) の位置 */
+  right: 1.5rem;      /* (3) 右から 1.5rem (約24px) の位置 */
+  z-index: 1001;      /* (4) 他の要素 (モーダルなど) より手前にしない */
+}
+
+/* ボタン自体のスタイル (既存の .edit-btn などを参考に) */
+.logout-button-container button {
+  padding: 0.5rem 1rem;
+  background-color: #6c757d; /* グレー系の色 */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.logout-button-container button:hover {
+  background-color: #5a6268;
+}

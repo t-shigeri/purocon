@@ -1,20 +1,18 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
-import LoginForm from "./components/LoginForm";
+import LoginForm from "./login/LoginForm";
 import AdminPage from "./admin/AdminPage";
-import ProductsList from "./admin/ProductsList";
-import Diagnoses from "./admin/Diagnoses";
-import Settings from "./admin/settings/Settings";
-import ProtectedRoute from "./components/ProtectedRouter";
+import ProductsList from "./admin/Product/ProductsList.jsx";
+import Diagnoses from "./admin/Diagnoses/Diagnoses";
+import ProtectedRoute from "./login/ProtectedRouter";
 import Contactspage from "./contacts/Contactspage";
 import SkinTypeChecker from "./question/SkinTypeChecker";
 
 // screendesign ブランチからの import
 import Weekrecommend from "./about/Weekrecommend.jsx";
 // main ブランチからの import
-import Ingredient from "./admin/Ingredient";
+import Ingredient from "./admin/Ingredient/Ingredient.jsx";
 import PasswordChangeForm from "./admin/settings/PasswordChangeForm";
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -46,16 +44,16 @@ const router = createBrowserRouter([
         element: <Diagnoses />,
       },
       {
-        path: "settings/settings",
-        element: <Settings />,
-      },
-      {
         path: "ingredient",
         element: <Ingredient />,
       },
       {
         path: "passwordchangeform",
         element: <PasswordChangeForm />,
+      },
+      {
+        path: "ProductsList",
+        element: <ProductsList />,
       },
     ],
   },
