@@ -32,35 +32,49 @@ export default function App() {
 
   return (
     <div className="app-container">
+      {/* ロゴバー */}
       <div onClick={onLogoTap} className="logo-bar">
         <div className="logo-icon" />
         <strong>PUROCON COSME</strong>
       </div>
+
+      {/* メインコンテンツエリア */}
       <div className="recommend-container">
-        {" "}
         <div className="recommend-inner">
-          {" "}
           <SkinTypeChecker />
         </div>
+
         <Link
           to="/Question"
           className="recommend-link"
           aria-label="今週のおすすめページへ"
         >
-          <span className="recommend-link-label"> 肌質診断はこちら</span>
+          {/* 画像エリア */}
+          <img
+            src="/assets/今週のおすすめ商品 ＆ キャンペーン！！.png"
+            alt="今週のおすすめ"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+          />
         </Link>
       </div>
+
+      {/* カテゴリーバー */}
       <div className="category-bar">
-        {" "}
         {["スキンケア", "メイク", "香水", "新商品"].map((c) => (
           <div key={c} className="category-item">
             {c}
           </div>
         ))}
       </div>
-      <h3 className="catalog-title">商品カタログ</h3>{" "}
+
+      <h3 className="catalog-title">商品カタログ</h3>
+
+      {/* 商品リスト */}
       <div className="catalog-grid">
-        {" "}
         {[
           {
             id: 1,
@@ -76,11 +90,9 @@ export default function App() {
           },
         ].map((p) => (
           <div key={p.id} className="product-card">
-            <div className="product-image-placeholder" />{" "}
+            <div className="product-image-placeholder" />
             <div className="product-info">
-              {" "}
               <div className="product-header">
-                {" "}
                 <strong>{p.title}</strong>
               </div>
               <div className="product-catch"> {p.catch}</div>
@@ -89,8 +101,9 @@ export default function App() {
           </div>
         ))}
       </div>
+
+      {/* 店舗情報 */}
       <div className="store-info">
-        {" "}
         <strong>店舗情報</strong>
         <div>福岡市中央区○○ 1-2-3 / 10:00-20:00</div>
         <div>今月のキャンペーン：スキンケア 20%OFF</div>
