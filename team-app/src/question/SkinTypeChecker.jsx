@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
- 
+
 export default function SkinTypeChecker() {
   const [step, setStep] = useState(1);
   const [selected1, setSelected1] = useState('');
   const [selected2, setSelected2] = useState('');
   const [selected3, setSelected3] = useState('');
   const [result, setResult] = useState('');
- 
+
   const question1 = {
     title: '以下のような肌の状態はありますか？',
     options: [
@@ -14,9 +14,10 @@ export default function SkinTypeChecker() {
       '季節・気温・生活習慣（睡眠不足・ストレス）で急に肌が荒れやすい',
       '汗やマスク・摩擦など、ちょっとした刺激でヒリつく',
       'ニキビではなく、赤み・ひりひり・かゆみ系のトラブルが出やすい',
+      '特になし',
     ],
   };
- 
+
   const question2 = {
     title: '普段の肌の状態を教えてください',
     options: [
@@ -26,7 +27,7 @@ export default function SkinTypeChecker() {
       { label: 'つっぱらないし、べたつかない', type: '普通肌' },
     ],
   };
- 
+
   const question3 = {
     title: 'あなたの毛穴の状態に近いものを選んでください',
     options: [
@@ -36,27 +37,27 @@ export default function SkinTypeChecker() {
       { label: '気にならない', img: '/normal.jpg' },
     ],
   };
- 
+
   const handleDecision = () => {
-    if (step === 1) {
-      if (!selected1) return setResult('どれか1つ選択してください。');
-      setResult('');
-      setStep(2);
-    } else if (step === 2) {
-      if (!selected2) return setResult('肌の状態を選択してください。');
-      setResult('');
-      setStep(3);
-    } else if (step === 3) {
-      if (!selected3) return setResult('毛穴の状態を選択してください。');
+    if ((step === 1 && !selected1) || (step === 2 && !selected2) || (step === 3 && !selected3)) {
+      setResult('選択してください');
+      return;
+    }
+
+    setResult('');
+    if (step === 3) {
       const match = question2.options.find(o => o.label === selected2);
       const type = match ? match.type : '';
-      setResult(
-        `あなたの肌タイプは「${type}」です。`
-      );
-      setStep(4);
+      setResult(`あなたの肌タイプは ${type}`);
     }
+    setStep(prev => prev + 1);
   };
- 
+
+  const handleBack = () => {
+    setResult('');
+    setStep(prev => Math.max(1, prev - 1));
+  };
+
   const handleRestart = () => {
     setStep(1);
     setSelected1('');
@@ -64,98 +65,56 @@ export default function SkinTypeChecker() {
     setSelected3('');
     setResult('');
   };
- 
-  // --- 1問目 ---
-  if (step === 1)
-    return (
-      <div>
-        <h2>{question1.title}</h2>
-        <form>
-          {question1.options.map((option, index) => (
-            <label key={index}>
+
+  const renderQuestion = (question, selected, setSelected, name) => (
+    <div>
+      <h2>{question.title}</h2>
+      <form>
+        {question.options.map((option, index) => {
+          const label = typeof option === 'string' ? option : option.label;
+          const img = option.img;
+          return (
+            <label key={index} style={{ display: 'block', marginBottom: '8px' }}>
               <input
                 type="radio"
-                name="q1"
-                value={option}
-                checked={selected1 === option}
-                onChange={() => setSelected1(option)}
+                name={name}
+                value={label}
+                checked={selected === label}
+                onChange={() => setSelected(label)}
               />
-              {option}
+              {label}
+              {img && step !== 4 && (
+                <div>
+                  <img src={img} alt={`${label}の参考画像`} style={{ width: '100px', marginTop: '4px' }} />
+                </div>
+              )}
             </label>
-          ))}
-        </form>
-        <button onClick={handleDecision}>決定</button>
-        {result && <p>{result}</p>}
-      </div>
-    );
- 
-  // --- 2問目 ---
-  if (step === 2)
-    return (
-      <div>
-        <h2>{question2.title}</h2>
-        <form>
-          {question2.options.map((option, index) => (
-            <label key={index}>
-              <input
-                type="radio"
-                name="q2"
-                value={option.label}
-                checked={selected2 === option.label}
-                onChange={() => setSelected2(option.label)}
-              />
-              {option.label}
-            </label>
-          ))}
-        </form>
-        <button onClick={handleDecision}>決定</button>
-        {result && <p>{result}</p>}
-      </div>
-    );
- 
-  // --- 3問目 ---
-  if (step === 3)
-    return (
-      <div>
-        <h2>{question3.title}</h2>
-        <div>
-          {question3.options.map((option, index) => (
-            <label key={index}>
-              ／画像：{option.img}／<br />
-              <input
-                type="radio"
-                name="q3"
-                value={option.label}
-                checked={selected3 === option.label}
-                onChange={() => setSelected3(option.label)}
-              />
-              {option.label}
-              <br />
-            </label>
-          ))}
-        </div>
-        <button onClick={handleDecision}>決定</button>
-        {result && <p>{result}</p>}
-      </div>
-    );
- 
-  // --- 結果画面 ---
-  if (step === 4)
-    return (
-      <div>
-        <h2>診断結果</h2>
-        <p><b>【1問目】</b><br />{question1.title}<br />あなたの回答：{selected1}</p>
-        <p><b>【2問目】</b><br />{question2.title}<br />あなたの回答：{selected2}</p>
-        <p><b>【3問目】</b><br />{question3.title}<br />
-        ／画像：{question3.options.find(o => o.label === selected3)?.img}／<br />
-        あなたの回答：{selected3}</p>
-        <hr />
-        <p><b>{result}</b></p>
- 
-        <button onClick={handleRestart}>もう一度診断する</button>
-        <br />
-        ／Reactのページに戻るボタン／
-      </div>
-    );
+          );
+        })}
+      </form>
+      <button onClick={handleDecision}>決定</button>
+      {!selected && result && <p>選択してください</p>}
+      {step > 1 && <button onClick={handleBack}>戻る</button>}
+    </div>
+  );
+
+  if (step === 1) return renderQuestion(question1, selected1, setSelected1, 'q1');
+  if (step === 2) return renderQuestion(question2, selected2, setSelected2, 'q2');
+  if (step === 3) return renderQuestion(question3, selected3, setSelected3, 'q3');
+
+  return (
+    <div>
+      <h2>診断結果</h2>
+      <p><b>【1問目】</b><br />{question1.title}<br />あなたの回答：{selected1}</p>
+      <p><b>【2問目】</b><br />{question2.title}<br />あなたの回答：{selected2}</p>
+      <p><b>【3問目】</b><br />{question3.title}<br />あなたの回答：{selected3}</p>
+      <hr />
+      <p><b>{result}</b></p>
+      <p>の傾向があります</p>
+      <button onClick={handleRestart}>もう一度診断する</button>
+      <button onClick={handleBack}>戻る</button>
+      <br />
+      ／Reactのページに戻るボタン／
+    </div>
+  );
 }
- 
