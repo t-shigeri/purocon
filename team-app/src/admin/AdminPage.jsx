@@ -21,11 +21,6 @@ export default function AdminHome() {
           <p>成分の登録・編集・削除を行います。</p>
         </Link>
 
-        <Link to="/admin/diagnoses" style={styles.card}>
-          <h2>診断結果管理</h2>
-          <p>お客様の診断履歴やおすすめ傾向を確認できます。</p>
-        </Link>
-
         <Link to="/admin/PasswordChangeForm" style={styles.card}>
           <h2>設定</h2>
           <p>システム設定を変更します。</p>
