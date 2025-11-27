@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-export default function SkinTypeChecker() {
+export default function SkinTypeChecker({ onBack }) {
   const [step, setStep] = useState(1);
-  const [selected1, setSelected1] = useState('');
-  const [selected2, setSelected2] = useState('');
-  const [selected3, setSelected3] = useState('');
+  const [selected1, setSelected1] = useState([]);
+  const [selected2, setSelected2] = useState([]);
+  const [selected3, setSelected3] = useState([]);
   const [result, setResult] = useState('');
 
   const question1 = {
@@ -21,48 +21,63 @@ export default function SkinTypeChecker() {
   const question2 = {
     title: '普段の肌の状態を教えてください',
     options: [
-      { label: '全体的に肌がつっぱる感じ', type: '乾燥肌' },
-      { label: '全体的に肌がべたつく', type: '脂性肌' },
-      { label: '部分的にべたつくし、つっぱる', type: '混合肌' },
-      { label: 'つっぱらないし、べたつかない', type: '普通肌' },
+      { label: '(乾燥肌)全体的に肌がつっぱる感じ', type: '乾燥肌' },
+      { label: '(脂性肌)全体的に肌がべたつく', type: '脂性肌' },
+      { label: '(混合肌)部分的にべたつくし、つっぱる', type: '混合肌' },
+      { label: '(普通肌)つっぱらないし、べたつかない', type: '普通肌' },
     ],
   };
 
   const question3 = {
     title: 'あなたの毛穴の状態に近いものを選んでください',
     options: [
-      { label: '黒ずみ毛穴', img: '/blackhead.jpg' },
-      { label: 'たるみ毛穴', img: '/sagging.jpg' },
-      { label: '詰まり毛穴', img: '/clogged.jpg' },
-      { label: '気にならない', img: '/normal.jpg' },
+      { label: '黒ずみ毛穴', img: '/Blackheads and pores.png' },
+      { label: 'たるみ毛穴', img: '/Sagging pores.png' },
+      { label: '詰まり毛穴', img: '/Clogged pores.png' },
+      { label: '気にならない', img: '/normal.png' },
     ],
   };
 
+  const toggleSelection = (selected, setSelected, value) => {
+    if (selected.includes(value)) {
+      setSelected(selected.filter(v => v !== value));
+    } else {
+      if (step === 1) {
+        if (value === '特になし') {
+          setSelected(['特になし']);
+        } else {
+          setSelected(selected.filter(v => v !== '特になし').concat(value));
+        }
+      } else {
+        setSelected([...selected, value]);
+      }
+    }
+  };
+
   const handleDecision = () => {
-    if ((step === 1 && !selected1) || (step === 2 && !selected2) || (step === 3 && !selected3)) {
+    if ((step === 1 && selected1.length === 0) ||
+        (step === 2 && selected2.length === 0) ||
+        (step === 3 && selected3.length === 0)) {
       setResult('選択してください');
       return;
     }
 
     setResult('');
     if (step === 3) {
-      const match = question2.options.find(o => o.label === selected2);
-      const type = match ? match.type : '';
-      setResult(`あなたの肌タイプは ${type}`);
+      const types = selected2.map(sel => {
+        const match = question2.options.find(o => o.label === sel);
+        return match ? match.type : '';
+      });
+      setResult(`あなたの肌タイプは ${types.join(', ')}`);
     }
     setStep(prev => prev + 1);
   };
 
-  const handleBack = () => {
-    setResult('');
-    setStep(prev => Math.max(1, prev - 1));
-  };
-
   const handleRestart = () => {
     setStep(1);
-    setSelected1('');
-    setSelected2('');
-    setSelected3('');
+    setSelected1([]);
+    setSelected2([]);
+    setSelected3([]);
     setResult('');
   };
 
@@ -74,27 +89,27 @@ export default function SkinTypeChecker() {
           const label = typeof option === 'string' ? option : option.label;
           const img = option.img;
           return (
-            <label key={index} style={{ display: 'block', marginBottom: '8px' }}>
+            <label key={index}>
               <input
-                type="radio"
+                type="checkbox"
                 name={name}
                 value={label}
-                checked={selected === label}
-                onChange={() => setSelected(label)}
+                checked={selected.includes(label)}
+                onChange={() => toggleSelection(selected, setSelected, label)}
               />
               {label}
-              {img && step !== 4 && (
+              {img && (
                 <div>
-                  <img src={img} alt={`${label}の参考画像`} style={{ width: '100px', marginTop: '4px' }} />
+                  <img src={img} alt={`${label}の参考画像`} style={{ width: '100px' }} />
                 </div>
               )}
             </label>
           );
         })}
       </form>
-      <button onClick={handleDecision}>決定</button>
-      {!selected && result && <p>選択してください</p>}
-      {step > 1 && <button onClick={handleBack}>戻る</button>}
+      <button type="button" onClick={handleDecision}>決定</button>
+      {selected.length === 0 && result === '選択してください' && <p>{result}</p>}
+      {step > 1 && <button type="button" onClick={() => setStep(prev => prev - 1)}>戻る</button>}
     </div>
   );
 
@@ -105,16 +120,22 @@ export default function SkinTypeChecker() {
   return (
     <div>
       <h2>診断結果</h2>
-      <p><b>【1問目】</b><br />{question1.title}<br />あなたの回答：{selected1}</p>
-      <p><b>【2問目】</b><br />{question2.title}<br />あなたの回答：{selected2}</p>
-      <p><b>【3問目】</b><br />{question3.title}<br />あなたの回答：{selected3}</p>
+      <p><b>【1問目】</b><br />{question1.title}<br />あなたの回答：{selected1.join(', ')}</p>
+      <p><b>【2問目】</b><br />{question2.title}<br />あなたの回答：{selected2.join(', ')}</p>
+      <p><b>【3問目】</b><br />{question3.title}<br />あなたの回答：{selected3.join(', ')}</p>
       <hr />
       <p><b>{result}</b></p>
       <p>の傾向があります</p>
-      <button onClick={handleRestart}>もう一度診断する</button>
-      <button onClick={handleBack}>戻る</button>
+
+      {selected1.length > 0 && !selected1.includes('特になし') && (
+        <p>敏感肌の傾向があります</p>
+      )}
+
+      <button type="button" onClick={handleRestart}>もう一度診断する</button>
+      <button type="button" onClick={() => setStep(prev => prev - 1)}>戻る</button>
       <br />
-      ／Reactのページに戻るボタン／
+      {/* App.jsxに戻るボタン */}
+      <button type="button" onClick={onBack}>Appに戻る</button>
     </div>
   );
 }
