@@ -56,7 +56,7 @@ class ExternalAPIConfigViewSet(viewsets.ModelViewSet):
         
         api_url = serializer.validated_data['api_url']
         api_key = serializer.validated_data['api_key']
-        
+
         try:
             # APIリクエストを送信
             headers = {

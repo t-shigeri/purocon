@@ -22,7 +22,6 @@ class ProductImage(models.Model):
     def __str__(self):
         return f"{self.product.product_name} の画像"
 
-
 class Access(models.Model):
     product = models.ForeignKey(
         Product,

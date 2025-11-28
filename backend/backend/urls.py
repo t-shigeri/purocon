@@ -29,6 +29,7 @@ router.register(r"admin/users", views.UserAdminViewSet, basename="admin-user")
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include("api.urls")),
+    path("api/recommend/", include("recommend.urls")),
     path("api/product/", include("product.urls")),
     path("contacts/", include("contacts.urls")),
     path("api/accounts/", include("accounts.urls")),
