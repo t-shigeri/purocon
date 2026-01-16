@@ -1,26 +1,185 @@
-.app{min-height:100vh;display:flex;flex-direction:column}
-
-/* header（今回のApp.jsxはヘッダーを内蔵UIで簡易化しているため最低限） */
-.site-header{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;
-  padding:12px 16px;background:rgba(17,19,21,.72);backdrop-filter:blur(8px) saturate(1.1);border-bottom:1px solid #222}
-
-/* フッター（ホーム/戻る/ヘルプ ※今回のApp.jsxでは独自UIでrender） */
-.site-footer{position:fixed;left:0;right:0;bottom:0;display:flex;gap:8px;justify-content:space-around;
-  padding:10px;background:rgba(17,19,21,.9);border-top:1px solid #222}
-.site-footer button{flex:1;padding:10px;border-radius:10px;border:1px solid #333;background:#1e2327;color:var(--fg)}
-
-/* 汎用カード */
-.card{background:var(--card);border:1px solid #222;border-radius:14px;overflow:hidden}
-.badge{font-size:12px;border:1px solid var(--accent);padding:2px 6px;border-radius:999px;color:var(--accent)}
-.price{color:var(--accent);font-weight:700}
-
-/* フォーム */
-.kiosk-form input{
-  width:100%;padding:10px;border-radius:10px;border:1px solid #333;background:#131619;color:var(--fg);
-}
-.kiosk-form button{
-  width:100%;padding:10px;border-radius:10px;border:1px solid #444;background:#2a2f34;color:var(--fg)
+/* 全体レイアウト（黒背景の中にタブレットっぽく） */
+.app-root {
+  min-height: 100vh;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
 }
 
-/* 小さめテキスト */
-.muted{color:var(--muted);font-size:12px}
+/* タブレット風フレーム */
+.device-frame {
+  background: #111;
+  padding: 16px;
+  border-radius: 26px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+  max-width: 960px;
+  width: 100%;
+}
+
+/* 中身（ヒーロー） */
+.hero {
+  border-radius: 22px;
+  padding: 24px 28px;
+  background: radial-gradient(circle at top left, #ffe4cf, #f5c8cf 45%, #f7e9ff);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 光のエフェクトっぽい */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.9), transparent 55%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.5), transparent 55%);
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+/* コンテンツ本体は上に */
+.hero-header,
+.hero-body {
+  position: relative;
+  z-index: 1;
+}
+
+/* ヘッダー（ロゴ＋言語切替） */
+.hero-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.hero-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.hero-logo-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.hero-logo-text {
+  font-weight: 600;
+  font-size: 14px;
+  color: #5f3b28;
+}
+
+.hero-lang {
+  font-size: 12px;
+  color: #5f3b28;
+}
+
+/* 本文レイアウト（左テキスト／右画像） */
+.hero-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: center;
+}
+
+.hero-copy {
+  max-width: 360px;
+}
+
+.hero-title {
+  font-size: 32px;
+  line-height: 1.2;
+  margin: 4px 0 8px;
+  color: #3a281c;
+}
+
+.hero-sub {
+  font-size: 14px;
+  color: #6c4a32;
+  margin-bottom: 18px;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* ボタン */
+.btn-primary,
+.btn-secondary {
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: #ff6b4a;
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(255, 107, 74, 0.45);
+}
+
+.btn-primary:hover {
+  filter: brightness(1.05);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.9);
+  color: #5f3b28;
+}
+
+/* 右側のビジュアル */
+.hero-visual {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.hero-image {
+  width: 100%;
+  max-width: 260px;
+  border-radius: 999px;
+  object-fit: cover;
+}
+
+/* 診断コンテンツのエリア */
+.quiz-section {
+  margin-top: 24px;
+  padding: 16px 8px 8px;
+  background: #faf5f8;
+  border-radius: 20px;
+}
+
+/* スマホ幅対応 */
+@media (max-width: 720px) {
+  .device-frame {
+    border-radius: 0;
+    padding: 12px;
+  }
+
+  .hero {
+    padding: 18px 16px;
+  }
+
+  .hero-body {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .hero-visual {
+    justify-content: center;
+  }
+
+  .hero-title {
+    font-size: 24px;
+  }
+}

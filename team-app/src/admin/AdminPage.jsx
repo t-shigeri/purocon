@@ -1,25 +1,29 @@
 import { Link } from "react-router-dom";
+import Logout from "../login/logout";
+import "./AdminPage.css";
 
 export default function AdminHome() {
   return (
     <div style={styles.container}>
       <h1 style={styles.title}>管理者メニュー</h1>
       <p style={styles.subtitle}>管理したい項目を選択してください</p>
-
+      <div className="logout-button-container">
+        <Logout />
+      </div>
       <div style={styles.menuContainer}>
         <Link to="/admin/products" style={styles.card}>
           <h2>商品管理</h2>
           <p>店舗にある美容液の登録・編集・削除を行います。</p>
         </Link>
 
-        <Link to="/admin/diagnoses" style={styles.card}>
-          <h2>診断結果管理</h2>
-          <p>お客様の診断履歴やおすすめ傾向を確認できます。</p>
+        <Link to="/admin/Ingredient" style={styles.card}>
+          <h2>成分管理</h2>
+          <p>成分の登録・編集・削除を行います。</p>
         </Link>
 
-        <Link to="/admin/settings" style={styles.card}>
+        <Link to="/admin/PasswordChangeForm" style={styles.card}>
           <h2>設定</h2>
-          <p>管理者アカウントやシステム設定を変更します。</p>
+          <p>システム設定を変更します。</p>
         </Link>
       </div>
     </div>
