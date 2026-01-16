@@ -55,9 +55,11 @@ export default function SkinTypeChecker({ onBack }) {
   };
 
   const handleDecision = () => {
-    if ((step === 1 && selected1.length === 0) ||
-        (step === 2 && selected2.length === 0) ||
-        (step === 3 && selected3.length === 0)) {
+    if (
+      (step === 1 && selected1.length === 0) ||
+      (step === 2 && selected2.length === 0) ||
+      (step === 3 && selected3.length === 0)
+    ) {
       setResult('選択してください');
       return;
     }
@@ -89,7 +91,12 @@ export default function SkinTypeChecker({ onBack }) {
           const label = typeof option === 'string' ? option : option.label;
           const img = option.img;
           return (
-            <label key={index}>
+            <label
+              key={index}
+              onDoubleClick={() => {
+                setSelected(selected.filter(v => v !== label));
+              }}
+            >
               <input
                 type="checkbox"
                 name={name}
@@ -113,7 +120,15 @@ export default function SkinTypeChecker({ onBack }) {
     </div>
   );
 
-  if (step === 1) return renderQuestion(question1, selected1, setSelected1, 'q1');
+  if (step === 1) {
+    return (
+      <div>
+        {renderQuestion(question1, selected1, setSelected1, 'q1')}
+        <button type="button" onClick={onBack}>Appに戻る</button>
+      </div>
+    );
+  }
+
   if (step === 2) return renderQuestion(question2, selected2, setSelected2, 'q2');
   if (step === 3) return renderQuestion(question3, selected3, setSelected3, 'q3');
 
@@ -134,7 +149,6 @@ export default function SkinTypeChecker({ onBack }) {
       <button type="button" onClick={handleRestart}>もう一度診断する</button>
       <button type="button" onClick={() => setStep(prev => prev - 1)}>戻る</button>
       <br />
-      {/* App.jsxに戻るボタン */}
       <button type="button" onClick={onBack}>Appに戻る</button>
     </div>
   );
