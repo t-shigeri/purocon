@@ -1,6 +1,5 @@
-import { useEffect, useRef } from "react";
-import Weekrecommend from "./about/Weekrecommend.jsx";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import "./App.css";
 import SkinTypeChecker from "./question/SkinTypeChecker.jsx";
@@ -8,6 +7,7 @@ import SkinTypeChecker from "./question/SkinTypeChecker.jsx";
 export default function App() {
   const navigate = useNavigate();
   const taps = useRef(0);
+  const [showQuiz, setShowQuiz] = useState(false);
 
   // ロゴ5回タップで /login へ遷移
   const onLogoTap = () => {
@@ -19,7 +19,6 @@ export default function App() {
     setTimeout(() => (taps.current = 0), 1200);
   };
 
-  // Alt+L で /login へ遷移
   useEffect(() => {
     const onKey = (e) => {
       if (e.altKey && (e.key === "l" || e.key === "L")) {
@@ -30,83 +29,60 @@ export default function App() {
     return () => window.removeEventListener("keydown", onKey);
   }, [navigate]);
 
+  const handleStartQuiz = () => {
+    setShowQuiz(true);
+    // document.getElementById("quiz-section")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <div className="app-container">
-      {/* ロゴバー */}
-      <div onClick={onLogoTap} className="logo-bar">
-        <div className="logo-icon" />
-        <strong>PUROCON COSME</strong>
-      </div>
+    <div className="app-root">
+      <div className="device-frame">
+        {/* ヒーローセクション */}
+        <div className="hero">
+          <header className="hero-header">
+            <div className="hero-logo" onClick={onLogoTap}>
+              <div className="hero-logo-icon" />
+              <span className="hero-logo-text">Radiance Labs</span>
+            </div>
+            <div className="hero-lang">日本語 / English</div>
+          </header>
 
-      {/* メインコンテンツエリア */}
-      <div className="recommend-container">
-        <div className="recommend-inner">
-          <SkinTypeChecker />
-        </div>
+          <div className="hero-body">
+            {/* テキストエリア */}
+            <div className="hero-copy">
+              <h1 className="hero-title">Unlock Your Skin&apos;s Potential</h1>
+              <p className="hero-sub">
+                パーソナライズ肌質診断 &amp; セラムガイド
+              </p>
 
-        <Link
-          to="/Question"
-          className="recommend-link"
-          aria-label="今週のおすすめページへ"
-        >
-          {/* 画像エリア */}
-          <img
-            src="/assets/今週のおすすめ商品 ＆ キャンペーン！！.png"
-            alt="今週のおすすめ"
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-            }}
-          />
-        </Link>
-      </div>
-
-      {/* カテゴリーバー */}
-      <div className="category-bar">
-        {["スキンケア", "メイク", "香水", "新商品"].map((c) => (
-          <div key={c} className="category-item">
-            {c}
-          </div>
-        ))}
-      </div>
-
-      <h3 className="catalog-title">商品カタログ</h3>
-
-      {/* 商品リスト */}
-      <div className="catalog-grid">
-        {[
-          {
-            id: 1,
-            title: "モイストローション",
-            price: 2800,
-            catch: "潤い続く化粧水",
-          },
-          {
-            id: 2,
-            title: "ルージュグロウ",
-            price: 3200,
-            catch: "鮮やかな発色",
-          },
-        ].map((p) => (
-          <div key={p.id} className="product-card">
-            <div className="product-image-placeholder" />
-            <div className="product-info">
-              <div className="product-header">
-                <strong>{p.title}</strong>
+              <div className="hero-buttons">
+                <button className="btn-primary" onClick={handleStartQuiz}>
+                  肌質診断をはじめる（無料）
+                </button>
+                <button className="btn-secondary">
+                  セラム・商品一覧を見る
+                </button>
               </div>
-              <div className="product-catch"> {p.catch}</div>
-              <div className="product-price"> ¥{p.price.toLocaleString()}</div>
+            </div>
+
+            {/* 画像エリア */}
+            <div className="hero-visual">
+              {/* 好きな画像に差し替えてOK */}
+              <img
+                src="/assets/hero_model.png"
+                alt="スキンケア女性イメージ"
+                className="hero-image"
+              />
             </div>
           </div>
-        ))}
-      </div>
+        </div>
 
-      {/* 店舗情報 */}
-      <div className="store-info">
-        <strong>店舗情報</strong>
-        <div>福岡市中央区○○ 1-2-3 / 10:00-20:00</div>
-        <div>今月のキャンペーン：スキンケア 20%OFF</div>
+        {/* 診断エリア：ボタン押したら表示 */}
+        {showQuiz && (
+          <div id="quiz-section" className="quiz-section">
+            <SkinTypeChecker />
+          </div>
+        )}
       </div>
     </div>
   );

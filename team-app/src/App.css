@@ -1,130 +1,185 @@
-/* App.css */
-
-/* メインコンテナ */
-.app-container {
-  max-width: 480px;
-  margin: 24px auto;
-  padding: 16px;
-  font-family: system-ui, sans-serif; /* JSXから推測 */
-}
-
-/* ロゴエリア */
-.logo-bar {
+/* 全体レイアウト（黒背景の中にタブレットっぽく） */
+.app-root {
+  min-height: 100vh;
+  background: #000;
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
-  cursor: pointer;
+  justify-content: center;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
 }
 
-.logo-icon {
-  width: 28px;
-  height: 28px;
-  background: #b04747;
-  border-radius: 6px;
-}
-
-/* おすすめエリア */
-.recommend-container {
-  border-radius: 12px;
-  overflow: hidden;
-  background: #e9e9ef;
-  height: 160px;
-  margin-bottom: 16px;
-  display: grid;
-}
-
-.recommend-inner {
+/* タブレット風フレーム */
+.device-frame {
+  background: #111;
   padding: 16px;
-  overflow: auto;
+  border-radius: 26px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+  max-width: 960px;
+  width: 100%;
 }
 
-.recommend-link {
-  /* スタイルが重複していたため整理 */
-  display: grid;
-  place-items: center;
-  height: 160px;
-  margin-bottom: 16px;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  background: #e9e9ef;
-  overflow: hidden;
-  cursor: pointer;
-  text-decoration: none;
-  color: inherit;
-}
-
-.recommend-link-label {
-  opacity: 0.75;
-}
-
-/* カテゴリバー */
-.category-bar {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-.category-item {
-  width: 64px;
-  height: 64px;
-  border-radius: 999px; /* 50%でも可 */
-  background: #f1d4d9;
-  display: grid;
-  place-items: center;
-  font-size: 12px;
-}
-
-/* 商品カタログ */
-.catalog-title {
-  margin: 8px 0;
-}
-
-.catalog-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-/* 商品カード */
-.product-card {
-  border: 1px solid #ddd;
-  border-radius: 12px;
+/* 中身（ヒーロー） */
+.hero {
+  border-radius: 22px;
+  padding: 24px 28px;
+  background: radial-gradient(circle at top left, #ffe4cf, #f5c8cf 45%, #f7e9ff);
+  position: relative;
   overflow: hidden;
 }
 
-.product-image-placeholder {
-  height: 110px;
-  background: #e3e6ea;
+/* 光のエフェクトっぽい */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.9), transparent 55%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.5), transparent 55%);
+  opacity: 0.85;
+  pointer-events: none;
 }
 
-.product-info {
-  padding: 10px;
+/* コンテンツ本体は上に */
+.hero-header,
+.hero-body {
+  position: relative;
+  z-index: 1;
 }
 
-.product-header {
+/* ヘッダー（ロゴ＋言語切替） */
+.hero-header {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
+  margin-bottom: 18px;
 }
 
-.product-catch {
-  font-size: 12px;
-  color: #666;
-  margin-top: 4px;
+.hero-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
 }
 
-.product-price {
-  color: #a55723;
-  font-weight: 700;
-  margin-top: 6px;
+.hero-logo-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.5);
 }
 
-/* 店舗情報 */
-.store-info {
-  margin-top: 20px;
-  padding-top: 12px;
-  border-top: 1px solid #eee;
+.hero-logo-text {
+  font-weight: 600;
   font-size: 14px;
-  color: #555;
+  color: #5f3b28;
+}
+
+.hero-lang {
+  font-size: 12px;
+  color: #5f3b28;
+}
+
+/* 本文レイアウト（左テキスト／右画像） */
+.hero-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: center;
+}
+
+.hero-copy {
+  max-width: 360px;
+}
+
+.hero-title {
+  font-size: 32px;
+  line-height: 1.2;
+  margin: 4px 0 8px;
+  color: #3a281c;
+}
+
+.hero-sub {
+  font-size: 14px;
+  color: #6c4a32;
+  margin-bottom: 18px;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* ボタン */
+.btn-primary,
+.btn-secondary {
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: #ff6b4a;
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(255, 107, 74, 0.45);
+}
+
+.btn-primary:hover {
+  filter: brightness(1.05);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.9);
+  color: #5f3b28;
+}
+
+/* 右側のビジュアル */
+.hero-visual {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.hero-image {
+  width: 100%;
+  max-width: 260px;
+  border-radius: 999px;
+  object-fit: cover;
+}
+
+/* 診断コンテンツのエリア */
+.quiz-section {
+  margin-top: 24px;
+  padding: 16px 8px 8px;
+  background: #faf5f8;
+  border-radius: 20px;
+}
+
+/* スマホ幅対応 */
+@media (max-width: 720px) {
+  .device-frame {
+    border-radius: 0;
+    padding: 12px;
+  }
+
+  .hero {
+    padding: 18px 16px;
+  }
+
+  .hero-body {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .hero-visual {
+    justify-content: center;
+  }
+
+  .hero-title {
+    font-size: 24px;
+  }
 }
