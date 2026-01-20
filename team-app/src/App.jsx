@@ -31,7 +31,13 @@ export default function App() {
 
   const handleStartQuiz = () => {
     setShowQuiz(true);
-    // document.getElementById("quiz-section")?.scrollIntoView({ behavior: "smooth" });
+    // 診断エリアが表示されたら、少し遅延してスクロール
+    setTimeout(() => {
+      document.getElementById("quiz-section")?.scrollIntoView({ 
+        behavior: "smooth",
+        block: "start"
+      });
+    }, 100);
   };
 
   return (
@@ -57,7 +63,7 @@ export default function App() {
 
               <div className="hero-buttons">
                 <button className="btn-primary" onClick={handleStartQuiz}>
-                  肌質診断をはじめる（無料）
+                  肌質診断をはじめる(無料)
                 </button>
                 <button className="btn-secondary">
                   セラム・商品一覧を見る
@@ -77,7 +83,7 @@ export default function App() {
           </div>
         </div>
 
-        {/* 診断エリア：ボタン押したら表示 */}
+        {/* 診断エリア:ボタン押したら表示 */}
         {showQuiz && (
           <div id="quiz-section" className="quiz-section">
             <SkinTypeChecker />
